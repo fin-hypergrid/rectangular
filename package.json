@@ -1,0 +1,22 @@
+{
+  "name": "rectangular",
+  "version": "0.1.0",
+  "description": "Simple rectangle and point classes",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/openfin/rectangular.git"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "SWirts, JEiten",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-mocha": "^2.1.3",
+    "gulp-plumber": "^1.0.1",
+    "jsdoc": "^3.3.2"
+  }
+}
