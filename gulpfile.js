@@ -56,7 +56,7 @@ gulp.task('depTest', ['lint'], test);
 gulp.task('depDoc', ['depTest'], doc);
 
 gulp.task('watch', function() {
-    gulp.watch(js.path, ['default']);
+    gulp.watch(js.path, ['depDoc']);
 });
 
 gulp.task('default', ['depDoc', 'watch']);

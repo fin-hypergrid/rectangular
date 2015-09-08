@@ -19,32 +19,11 @@
  *    (i.e., the parentheses).
  */
 
-(function() {
-
-    /**
-     * @summary Reference to module interface (namespace to hold the new objects).
-     *
-     * @desc The objects defined elsewhere in this file, {@link Point} and {@link Rectangle},
-     * are added to this `namespace` object, which is defined as follows:
-     *
-     * * Node.js support: If the `exports` object exists, these objects are added to it.
-     * * Browser support: If loaded directly by the browser with a &lt;script&gt; tag,
-     *   these objects are added to `window.fin` (which is created as needed).
-     *
-     * *Caveat:* Do not remove enclosing IIFE which supplies local scope in the latter cases.
-     *
-     * See bottom of file for public interface.
-     *
-     * @name namespace
-     * @type {object}
-     * @private
-     */
-    var namespace = typeof exports === 'object' && exports ||
-        ((window.fin = window.fin || {}).rectangular = {});
-
+(function(exports) {
 
     /**
      * Creates a new read-only property and attaches it to the provided context.
+     * @private
      * @param {string} name - Name for new property.
      * @param {*} [value] - Value of new property.
      */
@@ -59,33 +38,43 @@
 
     /**
      * @constructor Point
+     *
+     * @desc This object represents a single point in an abstract 2-dimensional matrix.
+     *
+     * The unit of measure is typically pixels.
+     * (If used to model computer graphics, vertical coordinates are typically measured downwards
+     * from the top of the window. This convention however is not inherent in this object.)
+     *
+     * Note: This object should be instantiated with the `new` keyword.
+     *
      * @param {number} x - the new point's `x` property
      * @param {number} y - the new point's `y` property
      */
     function Point(x, y) {
-        addReadOnlyProperty.call(this, 'x', x || 0);
-        addReadOnlyProperty.call(this, 'y', y || 0);
-    }
-
-    Point.prototype = {
 
         /**
          * @name x
-         * @abstract
          * @type {number}
          * @summary This point's horizontal coordinate.
          * @desc Created upon instantiation by the {@link Point|constructor}.
          * @memberOf Point.prototype
+         * @abstract
          */
+        addReadOnlyProperty.call(this, 'x', x || 0);
 
         /**
          * @name y
-         * @abstract
          * @type {number}
          * @summary This point's vertical coordinate.
          * @desc Created upon instantiation by the {@link Point|constructor}.
          * @memberOf Point.prototype
+         * @abstract
          */
+        addReadOnlyProperty.call(this, 'y', y || 0);
+
+    }
+
+    Point.prototype = {
 
         /**
          * @returns {Point} A new point which is this point's position increased by coordinates of given `point`.
@@ -136,7 +125,6 @@
             );
         },
 
-
         /**
          * @returns {Point} A new `Point` each coordinate of which is the higher of the same coordinate of
          * this point and given `point`.
@@ -164,6 +152,7 @@
                 deltaY * deltaY
             );
         },
+
         /**
          * _(Formerly: `equal`.)_
          * @returns {boolean} `true` iff _both_ coordinates of this point are exactly equal to those of given `point`.
@@ -267,10 +256,15 @@
     Point.prototype.GE = Point.prototype.greaterThanOrEqualTo;
     Point.prototype.LE = Point.prototype.lessThanOrEqualTo;
 
+
     /**
      * @constructor Rectangle
-     * @desc The unit of measure is typically pixels.
-     * Vertical coordinates are typically measured downwards from the top of the window.
+     *
+     * @desc This object represents a rectangular area within an abstract 2-dimensional matrix.
+     *
+     * The unit of measure is typically pixels.
+     * (If used to model computer graphics, vertical coordinates are typically measured downwards
+     * from the top of the window. This convention however is not inherent in this object.)
      *
      * Normally, the `x` and `y` parameters to the constructor describe the upper left corner of the rect.
      * However, negative values of `width` and `height` will be added to the given `x` and `y`. That is,
@@ -280,6 +274,8 @@
      * * The `extent`, `width`, and `height` properties _always_ give positive values.
      * * The `origin`, `top`, and `left` properties _always_ reflect the upper left corner.
      * * The `corner`, `bottom`, and `right` properties _always_ reflect the lower right corner.
+     *
+     * Note: This object should be instantiated with the `new` keyword.
      *
      * @param {number} [x=0] - Horizontal coordinate of some corner of the rect.
      * @param {number} [y=0] - Vertical coordinate of some corner of the rect.
@@ -298,26 +294,18 @@
             height = -height;
         }
 
-        addReadOnlyProperty.call(this, 'origin', new Point(x, y));
-        addReadOnlyProperty.call(this, 'extent', new Point(width, height));
-        addReadOnlyProperty.call(this, 'corner', new Point(x + width, y + height));
-        addReadOnlyProperty.call(this, 'center', new Point(x + (width / 2), y + (height / 2)));
-    }
-
-    Rectangle.prototype = {
-
         /**
          * @name origin
-         * @abstract
          * @type {Point}
          * @summary Upper left corner of this rect.
          * @desc Created upon instantiation by the {@linkplain Rectangle|constructor}.
          * @memberOf Rectangle.prototype
+         * @abstract
          */
+        addReadOnlyProperty.call(this, 'origin', new Point(x, y));
 
         /**
          * @name extent
-         * @abstract
          * @type {Point}
          * @summary this rect's width and height.
          * @desc Unlike the other `Point` properties, `extent` is not a global coordinate pair; rather it consists of a _width_ (`x`, always positive) and a _height_ (`y`, always positive).
@@ -327,27 +315,35 @@
          * Created upon instantiation by the {@linkplain Rectangle|constructor}.
          * @see The {@link Rectangle#corner|corner} method.
          * @memberOf Rectangle.prototype
+         * @abstract
          */
+        addReadOnlyProperty.call(this, 'extent', new Point(width, height));
 
         /**
          * @name corner
-         * @abstract
          * @type {Point}
          * @summary Lower right corner of this rect.
          * @desc This is a calculated value created upon instantiation by the {@linkplain Rectangle|constructor}. It is `origin` offset by `extent`.
          *
          * **Note:** These coordinates actually point to the pixel one below and one to the right of the rect's actual lower right pixel.
          * @memberOf Rectangle.prototype
+         * @abstract
          */
+        addReadOnlyProperty.call(this, 'corner', new Point(x + width, y + height));
 
         /**
          * @name center
-         * @abstract
          * @type {Point}
          * @summary Center of this rect.
          * @desc Created upon instantiation by the {@linkplain Rectangle|constructor}.
          * @memberOf Rectangle.prototype
+         * @abstract
          */
+        addReadOnlyProperty.call(this, 'center', new Point(x + (width / 2), y + (height / 2)));
+
+    }
+
+    Rectangle.prototype = {
 
         /**
          * @type {number}
@@ -567,8 +563,11 @@
     };
 
     // Interface
-    namespace.Point = Point;
-    namespace.Rectangle = Rectangle;
+    exports.Point = Point;
+    exports.Rectangle = Rectangle;
 
-})();
-namespace
+})(
+    typeof exports === 'object'
+        ? exports // Node.js support
+        : ((window.fin = window.fin || {}).rectangular = {}) // window.fin support
+);

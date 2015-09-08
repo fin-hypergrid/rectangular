@@ -1,6 +1,7 @@
 {
   "name": "rectangular",
   "version": "0.1.0",
+  "main": "./src/js/rectangular.js",
   "description": "Simple rectangle and point classes",
   "repository": {
     "type": "git",
