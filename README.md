@@ -1,6 +1,10 @@
 # rectangular
 Simple rectangle and point APIs
 
+## API documentation
+
+Detailed API docs can be found [here](http://openfin.github.io/rectangular/).
+
 ## Regarding submodules
 
 This repo has a git _submodule_, which on the remote appears as a folder that
