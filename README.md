@@ -1,5 +1,5 @@
 # rectangular
-Simple rectangle and point APIs
+Simple rectangle and point classes
 
 ## API documentation
 
