@@ -1,6 +1,6 @@
 {
   "name": "rectangular",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "main": "./src/js/rectangular.js",
   "description": "Simple rectangle and point classes",
   "repository": {
@@ -13,11 +13,14 @@
   "author": "SWirts, JEiten",
   "license": "MIT",
   "devDependencies": {
+    "browser-sync": "^2.9.11",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-load-plugins": "^1.0.0",
     "gulp-mocha": "^2.1.3",
-    "gulp-plumber": "^1.0.1",
-    "jsdoc": "^3.3.2"
+    "gulp-rename": "^1.2.2",
+    "jsdoc": "^3.3.2",
+    "run-sequence": "^1.1.4"
   }
 }

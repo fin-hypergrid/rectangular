@@ -29,7 +29,7 @@
      */
     function addReadOnlyProperty(name, value) {
         Object.defineProperty(this, name, {
-            value: value || 0,
+            value: value,
             writable: false,
             enumerable: true,
             configurable: false
@@ -60,7 +60,7 @@
          * @memberOf Point.prototype
          * @abstract
          */
-        addReadOnlyProperty.call(this, 'x', x || 0);
+        addReadOnlyProperty.call(this, 'x', Number(x) || 0);
 
         /**
          * @name y
@@ -70,7 +70,7 @@
          * @memberOf Point.prototype
          * @abstract
          */
-        addReadOnlyProperty.call(this, 'y', y || 0);
+        addReadOnlyProperty.call(this, 'y', Number(y) || 0);
 
     }
 
@@ -114,7 +114,7 @@
         },
 
         /**
-         * @returns {Point} A new point positioned to lowest x and least y of this point and given `point`.
+         * @returns {Point} A new `Point` positioned to least x and least y of this point and given `point`.
          * @param {Point} point - A point to compare to this point.
          * @memberOf Point.prototype
          */
@@ -126,8 +126,7 @@
         },
 
         /**
-         * @returns {Point} A new `Point` each coordinate of which is the higher of the same coordinate of
-         * this point and given `point`.
+         * @returns {Point} A new `Point` positioned to greatest x and greatest y of this point and given `point`.
          * @param {Point} point - A point to compare to this point.
          * @memberOf Point.prototype
          */
@@ -283,6 +282,11 @@
      * @param {number} [height=0] - Height of the new rect. May be negative (see above).
      */
     function Rectangle(x, y, width, height) {
+
+        x = Number(x) || 0;
+        y = Number(y) || 0;
+        width = Number(width) || 0;
+        height = Number(height) || 0;
 
         if (width < 0) {
             x += width;
@@ -444,7 +448,7 @@
 
         /**
          * _(Formerly `isContainedWithinRectangle`.)_
-         * @returns {boolean} `true` iff this `rect` is entirely contained within given `rect`.
+         * @returns {boolean} `true` iff `this` rect is entirely contained within given `rect`.
          * @param {Rectangle} rect - Rectangle to test against this rect.
          * @memberOf Rectangle.prototype
          */
@@ -487,13 +491,13 @@
          */
         union: function(rect) {
             var origin = this.origin.min(rect.origin),
-                corner = this.corner.max(rect.corner);
+                corner = this.corner.max(rect.corner),
+                extent = corner.minus(origin);
 
             return new Rectangle(
-                origin.x,
-                origin.y,
-                corner.x - origin.x,
-                corner.y - origin.y);
+                origin.x, origin.y,
+                extent.x, extent.y
+            );
         },
 
         /**
@@ -531,15 +535,15 @@
          */
         intersect: function(rect, ifNoneAction, context) {
             var result = null,
-                originX = Math.max(rect.origin.x, this.origin.x),
-                originY = Math.max(rect.origin.y, this.origin.y),
-                cornerX = Math.min(rect.corner.x, this.corner.x),
-                cornerY = Math.min(rect.corner.y, this.corner.y),
-                width = cornerX - originX,
-                height = cornerY - originY;
+                origin = this.origin.max(rect.origin),
+                corner = this.corner.min(rect.corner),
+                extent = corner.minus(origin);
 
-            if (width > 0 && height > 0) {
-                result = new Rectangle(originX, originY, width, height);
+            if (extent.x > 0 && extent.y > 0) {
+                result = new Rectangle(
+                    origin.x, origin.y,
+                    extent.x, extent.y
+                );
             } else if (typeof ifNoneAction === 'function') {
                 result = ifNoneAction.call(context || this, rect);
             }
