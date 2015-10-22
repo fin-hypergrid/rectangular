@@ -32,6 +32,9 @@ cp ../../$repo/index.js ./$module.js >/dev/null
 # make a minified version
 uglify -s $module.js -o $module.min.js
 
+# copy the demo
+cp ../../$repo/demo.html . >>/dev/null
+
 # copy all source files from src/js to the cdn directory here
 # ln -s ../../$repo/src/js src
 # ls src | while read a; do uglify -s src/$a -o ${a%.js}.min.js; done
