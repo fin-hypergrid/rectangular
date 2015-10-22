@@ -1,3 +1,11 @@
-.idea
+.*
+*.sh
+*.html
+bower*
+gulp*
+README.md
 jsdoc-template
+node_modules
+src
 doc
+test
