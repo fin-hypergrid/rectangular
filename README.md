@@ -1,6 +1,8 @@
 # rectangular
 Simple rectangle and point classes
 
+Try the [demo](https://openfin.github.io/rectangular/demo.html). _(This demo just shows one or two features; it's really just a test harness.)_
+
 ## API documentation
 
 Detailed API docs can be found [here](http://openfin.github.io/rectangular/).

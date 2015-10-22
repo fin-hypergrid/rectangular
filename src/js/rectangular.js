@@ -590,15 +590,11 @@
  * `module.exports = yourAPI` *or* a series of individual property assignments, `module.exports.property = property`.
  *
  * Before the IIFE runs, the actual parameter expressions are executed:
- * 1. If `window` object undefined, we're in NodeJs so assume there is a `module` object with an `exports` property
- * 2. If `window` object defined, we're in browser
- * 2.a. If `module` object predefined, use it
- * 2.b. If `module` object undefined, create a `rectangular` object
+ * 1. If `module` object defined, we're in NodeJs so assume there is a `module` object with an `exports` object
+ * 2. If `module` object undefined, we're in browser so define a `window.rectangular` object with an `exports` object
  *
  * After the IIFE returns:
- * Because it always returns undefined, the expression after the || will execute:
- * 1. If `window` object undefined, then we're in NodeJs so we're done
- * 2. If `window` object defined, then we're in browser
- * 2.a. If `module` object predefined, we're done; results are in `moudule.exports`
- * 2.b. If `module` object undefined, redefine`rectangular` to be the `rectangular.exports` object
+ * Because it always returns undefined, the expression after the || will always execute:
+ * 1. If `module` object defined, then we're in NodeJs so we're done
+ * 2. If `module` object undefined, then we're in browser so redefine`window.rectangular` as its `exports` object
  */
