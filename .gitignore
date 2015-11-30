@@ -1,5 +1,8 @@
 .DS_Store
-.idea
-node_modules
-doc
-index.js
+/.idea
+/build/*.js
+/doc
+/node_modules
+/src/README.md
+/src/LICENSE
+/src/package.json
