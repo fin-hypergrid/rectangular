@@ -11,14 +11,7 @@ var runSequence = require('run-sequence'),
 var name     = 'rectangular',
     srcDir   = './src/',
     testDir  = './test/',
-    jsDir    = srcDir + 'js/',
-    jsFiles  = '**/*.js',
     buildDir = './build';
-
-var js = {
-    dir   : jsDir,
-    files : jsDir + jsFiles
-};
 
 //  //  //  //  //  //  //  //  //  //  //  //
 
@@ -54,7 +47,7 @@ gulp.task('default', ['build', 'watch'], browserSyncLaunchServer);
 //  //  //  //  //  //  //  //  //  //  //  //
 
 function lint() {
-    return gulp.src(js.files)
+    return gulp.src(srcDir + 'index.js')
         .pipe($$.excludeGitignore())
         .pipe($$.eslint())
         .pipe($$.eslint.format())
@@ -104,7 +97,7 @@ function browserSyncLaunchServer() {
             baseDir: buildDir,
             index: "demo.html"
         },
-        port: 5008
+        port: 5006
     });
 }
 
