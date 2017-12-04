@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangular Demo</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <script>
+        fin = { Hypergrid: { modules:[] }};
+    </script>
+    <script src="../1.0.2/build/rectangular.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+
+<p style="font: bold 12pt serif; font-style: italic; font-weight: normal">
+    Click each button in the order given:
+</p>
+
+<button class="newrect">
+    var <input class="var" value="myRect1"/> =
+    new Rectangle(
+    <span>x=</span><input class="parm" id="x" value="100"/>,
+    <span>y=</span><input class="parm" id="y" value="200"/>,
+    <span>width=</span><input class="parm" id="width" value="150"/>,
+    <span>height=</span><input class="parm" id="height" value="100"/>
+    );
+</button>
+
+<button class="newrect">
+    var <input class="var" value="myRect2"/> =
+    new Rectangle(
+    <span>x=</span><input class="parm" value="150"/>,
+    <span>y=</span><input class="parm" value="250"/>,
+    <span>width=</span><input class="parm" value="150"/>,
+    <span>height=</span><input class="parm" value="100"/>
+    );
+</button>
+
+<button class="intersect">
+    var
+    <input class="var" value="myInter1"/> =
+    <input class="var" value="myRect1"/>.intersects(
+    <input class="var" value="myRect2"/>
+    );
+</button>
+
+</body>
+</html>

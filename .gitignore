@@ -3,6 +3,3 @@
 /build/*.js
 /doc
 /node_modules
-/src/README.md
-/src/LICENSE
-/src/package.json

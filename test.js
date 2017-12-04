@@ -4,7 +4,7 @@
 
 var assert = require('assert');
 
-var rectangular = require('../src/');
+var rectangular = require('.');
 
 var Point = rectangular.Point,
     Rectangle = rectangular.Rectangle;
