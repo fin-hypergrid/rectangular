@@ -1,4 +1,4 @@
-'use strict';
+(function(modules, exports) {'use strict';
 
 /* eslint-env node, browser */
 
@@ -550,3 +550,4 @@ Rectangle.prototype = {
 // Interface
 exports.Point = Point;
 exports.Rectangle = Rectangle;
+})(rectangular = { exports: {} }, rectangular.exports); rectangular = rectangular.exports;
